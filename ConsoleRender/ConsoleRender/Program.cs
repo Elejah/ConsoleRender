@@ -19,14 +19,16 @@ namespace ConsoleRender
 
         static void ConvertDiagram(string fileName)
         {
-            string name = MakeNewFileName(fileName);
-            string s = "/k draw.io.exe -x " + "\"" + fileName + "\"" + " -o " + "\"" + fileName + "\"";
+            string s = "/k draw.io.exe -x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\"";
+            Console.WriteLine(s);
             System.Diagnostics.Process.Start("CMD.exe", s);
         }
 
         static string MakeNewFileName(string fileName)
         {
-            return fileName.Split('\\', '.')[1] + ".png";
+            var array = fileName.Split('\\', '.');
+            var  s = array[array.Length-2];
+            return s + ".png";
         }
     }
 }
