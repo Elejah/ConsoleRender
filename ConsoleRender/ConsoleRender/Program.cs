@@ -20,7 +20,6 @@ namespace ConsoleRender
         static void ConvertDiagram(string fileName)
         {
             string s = "/k draw.io.exe -x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\"";
-            Console.WriteLine(s);
             System.Diagnostics.Process.Start("CMD.exe", s);
         }
 
