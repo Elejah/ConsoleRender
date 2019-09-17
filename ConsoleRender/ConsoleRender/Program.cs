@@ -8,30 +8,25 @@ namespace ConsoleRender
         [STAThread]
         static void Main(string[] args)
         {
+            //Environment.SetEnvironmentVariable("Path", "C:\\Program Files\\draw.io", EnvironmentVariableTarget.Machine);
             OpenFileDialog openFileDialogImage = new OpenFileDialog();
             if (openFileDialogImage.ShowDialog() == DialogResult.OK)
             {
                 string fileName = openFileDialogImage.FileName;
-                string news = fileName.Replace(".drawio", ".xml");
-                Console.WriteLine(news);
-                Console.ReadLine();
-                LoadImage2();
-                LoadImage1(news);
+                ConvertDiagram(fileName);
             }
         }
 
-        static void LoadImage1(string path)
+        static void ConvertDiagram(string fileName)
         {
-            string strCmdText;
-            strCmdText = "/k drawio "+path+" -o test.png";
-            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            string name = MakeNewFileName(fileName);
+            string s = "/k draw.io.exe -x " + "\"" + fileName + "\"" + " -o " + "\"" + fileName + "\"";
+            System.Diagnostics.Process.Start("CMD.exe", s);
         }
 
-        static void LoadImage2()
+        static string MakeNewFileName(string fileName)
         {
-            string strCmdText;
-            strCmdText = "/k npm install --global draw.io - export";
-            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            return fileName.Split('\\', '.')[1] + ".png";
         }
     }
 }
