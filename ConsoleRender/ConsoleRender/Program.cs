@@ -9,7 +9,6 @@ namespace ConsoleRender
         [STAThread]
         static void Main(string[] args)
         {
-            //Environment.SetEnvironmentVariable("Path", "C:\\Program Files\\draw.io", EnvironmentVariableTarget.Machine);
             OpenFileDialog openFileDialogImage = new OpenFileDialog();
             if (openFileDialogImage.ShowDialog() == DialogResult.OK)
             {
