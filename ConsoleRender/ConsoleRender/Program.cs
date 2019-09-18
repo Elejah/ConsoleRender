@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace ConsoleRender
@@ -19,8 +20,16 @@ namespace ConsoleRender
 
         static void ConvertDiagram(string fileName)
         {
-            string s = "/k draw.io.exe -x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\""+" -s 10";
-            System.Diagnostics.Process.Start("CMD.exe", s);
+            string s = "-x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\""+" -s 10";
+            Console.WriteLine(s);
+            string ss = "--help";
+            Process process = new Process();
+            process.StartInfo.FileName = "C:\\Program Files\\draw.io\\draw.io.exe";
+            process.StartInfo.Arguments = s;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            process.Start();
+            process.WaitForExit();
+
         }
 
         static string MakeNewFileName(string fileName)
