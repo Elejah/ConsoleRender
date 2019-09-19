@@ -19,9 +19,8 @@ namespace ConsoleRender
 
         static void ConvertDiagram(string fileName)
         {
-            string s = "-x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\""+" -s 10";
+            string s = "-x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\""+" -s 2";
             Process process = new Process();
-            Console.WriteLine(s);
             process.StartInfo.FileName = "C:\\Program Files\\draw.io\\draw.io.exe";
             process.StartInfo.Arguments = s;
             process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
@@ -31,10 +30,12 @@ namespace ConsoleRender
 
         static string MakeNewFileName(string fileName)
         {
-            var s = fileName.Replace(".xml", ".png");
-            s = fileName.Replace(".drawio", ".png");
-
-            return s;
+            var newFileName = fileName.Replace(".drawio", ".png");
+            if (newFileName == fileName)
+            {
+                newFileName = fileName.Replace(".xml", ".png");
+            }
+            return newFileName;
         }
     }
 }
