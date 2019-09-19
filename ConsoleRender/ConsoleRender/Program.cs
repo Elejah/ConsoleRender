@@ -19,13 +19,12 @@ namespace ConsoleRender
 
         static void ConvertDiagram(string fileName)
         {
-            string s = "-x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\""+" -s 2";
+            string command = "-x " + "\"" + fileName + "\"" + " -o " + "\"" + MakeNewFileName(fileName) + "\""+" -s 2";
+
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Program Files\\draw.io\\draw.io.exe";
-            process.StartInfo.Arguments = s;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            process.StartInfo.Arguments = command;
             process.Start();
-            process.WaitForExit();
         }
 
         static string MakeNewFileName(string fileName)
