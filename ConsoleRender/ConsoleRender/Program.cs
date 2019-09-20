@@ -23,11 +23,11 @@ namespace ConsoleRender
         {
             Collection<string> arguments = new Collection<string>()
             {
-              " -x ",
-              "\"" + fileName + "\"" ,
-              " -o ",
-              "\"" + MakeNewFileName(fileName) + "\"",
-              " -s 10"
+                " -x ",
+                "\"" + fileName + "\"" ,
+                " -o ",
+                "\"" + MakeNewFileName(fileName) + "\"" ,
+                " -s 10 "
             };
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Program Files\\draw.io\\draw.io.exe";
