@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ConsoleRender
 {
@@ -21,20 +22,33 @@ namespace ConsoleRender
 
         static void ConvertDiagram(string fileName)
         {
+            var quality = 8;
             Collection<string> arguments = new Collection<string>()
             {
-                " -x ",
+                "-x ",
                 "\"" + fileName + "\"" ,
                 " -o ",
                 "\"" + MakeNewFileName(fileName) + "\"" ,
-                " -s 10 "
+                " -s ",
+                quality.ToString()
             };
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Program Files\\draw.io\\draw.io.exe";
             process.StartInfo.Arguments = ConcatenateCollectionItems(arguments);
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
             process.Start();
-            process.WaitForExit();
-            //Console.WriteLine(process.ExitCode);
+            var renderingDelay = quality * 3000;
+            if (!process.WaitForExit(renderingDelay))
+            {
+                process.Kill();
+            }
+            while (!process.StandardOutput.EndOfStream)
+            {
+                string line = process.StandardOutput.ReadLine();
+                Console.WriteLine(line);
+            }
         }
 
         static string MakeNewFileName(string fileName)
