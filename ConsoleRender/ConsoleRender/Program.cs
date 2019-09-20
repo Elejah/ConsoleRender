@@ -34,6 +34,7 @@ namespace ConsoleRender
             process.StartInfo.Arguments = ConcatenateCollectionItems(arguments);
             process.Start();
             process.WaitForExit();
+            //Console.WriteLine(process.ExitCode);
         }
 
         static string MakeNewFileName(string fileName)
