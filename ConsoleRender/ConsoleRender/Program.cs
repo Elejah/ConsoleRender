@@ -46,8 +46,8 @@ namespace ConsoleRender
             }
             while (!process.StandardOutput.EndOfStream)
             {
-                string line = process.StandardOutput.ReadLine();
-                Console.WriteLine(line);
+                string outputData = process.StandardOutput.ReadLine();
+                Console.WriteLine(outputData);
             }
         }
 
